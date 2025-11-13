@@ -1,0 +1,650 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;TutorAI - Personalized Learning for Your Child&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Load Tailwind CSS --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Load Lucide Icons for aesthetic features --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Custom font import and styling */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f9fafb; /* Light Gray Background */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.text-tutor-primary {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #1e3a8a; /* Deep Blue */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.bg-tutor-accent {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #10b981; /* Emerald Green */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hover\:bg-tutor-accent-dark:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #059669;<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Custom modal transition styles for better UX */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.modal-enter-active, .modal-leave-active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: opacity 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.modal-enter-from, .modal-leave-to {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.modal-content-enter-active, .modal-content-leave-active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.3s ease, opacity 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.modal-content-enter-from, .modal-content-leave-to {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: scale(0.95);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>opacity: 0;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body class="antialiased"&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Header &amp; Navigation --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;header class="bg-white shadow-sm sticky top-0 z-10"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex items-center space-x-2"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="text-3xl text-tutor-primary"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i data-lucide="graduation-cap" class="w-8 h-8"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;span class="text-2xl font-extrabold text-tutor-primary"&gt;TutorAI&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Added open-onboarding-modal class --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="#" class="open-onboarding-modal hidden sm:inline-flex px-4 py-2 text-sm font-semibold rounded-full bg-tutor-accent text-white hover:bg-tutor-accent-dark transition duration-300 shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Start Free Trial</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Added open-onboarding-modal class --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;a href="#" class="open-onboarding-modal sm:hidden px-3 py-1.5 text-sm font-semibold rounded-full bg-tutor-accent text-white hover:bg-tutor-accent-dark transition duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>Trial</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/header&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 1. Hero Section --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="py-16 sm:py-24 bg-white text-gray-900"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="lg:col-span-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 leading-tight"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Give your child the support they need to succeed, &lt;span class="text-tutor-accent"&gt;without the added stress.&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="mt-4 text-xl text-gray-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>TutorAI provides 24/7 AI-powered tutoring that helps your child master schoolwork, build confidence, and grow their love of learning.</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div class="mt-8 space-y-4 sm:space-y-0 sm:flex sm:space-x-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;!-- Added open-onboarding-modal class --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;a href="#" class="open-onboarding-modal inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 text-lg font-bold rounded-xl bg-tutor-accent text-white hover:bg-tutor-accent-dark transition duration-300 shadow-xl transform hover:scale-[1.02]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>Start Your 14-Day Free Trial</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="mt-4 text-sm text-gray-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>No credit card required for the first 14 days. Just $40/month after.</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Hero Image Placeholder (Updated to a direct, professional placeholder image) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="lg:col-span-6 mt-12 lg:mt-0 rounded-2xl shadow-2xl overflow-hidden transform hover:scale-[1.01] transition duration-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;img<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>src="https://placehold.co/600x400/1e3a8a/ffffff?text=Personalized%20AI%20Tutoring%20Session"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>alt="A visual representation of an AI-powered, personalized tutoring session."<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>class="w-full h-auto object-cover"<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                            </span>onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e3a8a/ffffff?text=AI%20Learning%20Session';"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 2. What is TutorAI &amp; Pricing Banner --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="py-16 bg-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6"&gt;What is TutorAI?&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>TutorAI is designed for busy parents who want to give their children a leg up in school but don't have the time to help with homework every night. Our &lt;span class="font-bold"&gt;friendly, conversational AI&lt;/span&gt; guides your child through their assignments, encouraging them to think critically and solve problems on their own.</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Pricing Highlight Banner --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mt-12 text-center bg-indigo-50 border-4 border-indigo-200 p-6 sm:p-8 rounded-2xl shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-2xl sm:text-3xl font-bold text-tutor-primary"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>Unlimited 24/7 AI Tutoring for Just</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;span class="text-tutor-accent text-4xl sm:text-5xl font-extrabold"&gt;$40&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>a month.</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="mt-2 text-md text-indigo-700"&gt;Less than the cost of one hour with a private tutor.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 3. How It Works (4 Steps) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="py-16 sm:py-24 bg-gray-50"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center mb-12"&gt;How It Works in 4 Simple Steps&lt;/h2&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Step 1 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-t-tutor-accent transform hover:shadow-xl transition duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;i data-lucide="upload" class="w-10 h-10 text-tutor-accent mb-4 p-2 bg-tutor-accent/10 rounded-full"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-bold text-gray-900 mb-2"&gt;1. Securely Upload Assignments&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-gray-600"&gt;Parents upload photos or documents of homework, and our AI instantly prepares to guide the student through the material.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Step 2 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-t-tutor-primary transform hover:shadow-xl transition duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;i data-lucide="book-open-check" class="w-10 h-10 text-tutor-primary mb-4 p-2 bg-tutor-primary/10 rounded-full"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-bold text-gray-900 mb-2"&gt;2. State-Aligned Curriculum&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-gray-600"&gt;We align support with state-specific curricula, ensuring the help your child gets is directly relevant to their classroom learning.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Step 3 (Updated Text) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-t-orange-500 transform hover:shadow-xl transition duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;i data-lucide="message-circle-code" class="w-10 h-10 text-orange-500 mb-4 p-2 bg-orange-500/10 rounded-full"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-bold text-gray-900 mb-2"&gt;3. The Conversational "Voice"&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-gray-600"&gt;Students interact via text or speech with a warm, encouraging AI voice. It asks leading questions and provides strategic hints, focusing on guiding them toward the solution.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Step 4 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-t-purple-500 transform hover:shadow-xl transition duration-300"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;i data-lucide="bar-chart-3" class="w-10 h-10 text-purple-500 mb-4 p-2 bg-purple-500/10 rounded-full"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h3 class="text-xl font-bold text-gray-900 mb-2"&gt;4. Progress Tracking for Parents&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="text-gray-600"&gt;Your dedicated parent dashboard offers a transparent view of subjects worked on, session time, and concepts mastered for total peace of mind.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 4. Why Parents Choose TutorAI &amp; Testimonial --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="py-16 sm:py-24 bg-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Benefits Column --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="lg:col-span-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-8"&gt;Why Parents Choose TutorAI&lt;/h2&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                        </span></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;ul class="space-y-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li class="flex items-start"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;i data-lucide="clock" class="w-6 h-6 text-tutor-primary flex-shrink-0 mt-1"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="ml-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h3 class="text-xl font-bold text-gray-900"&gt;24/7 Convenience&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-gray-600"&gt;Homework help is available whenever your child needs it—after dinner or before school. No scheduling conflicts, ever.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li class="flex items-start"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;i data-lucide="zap" class="w-6 h-6 text-tutor-accent flex-shrink-0 mt-1"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="ml-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h3 class="text-xl font-bold text-gray-900"&gt;Encourages Independence&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-gray-600"&gt;By guiding them to the solution, we build critical thinking and self-confidence, ensuring they deeply understand the material instead of relying on simple memorization.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;li class="flex items-start"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;i data-lucide="wallet" class="w-6 h-6 text-indigo-500 flex-shrink-0 mt-1"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;div class="ml-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;h3 class="text-xl font-bold text-gray-900"&gt;Cost-Effective Solution&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                    </span>&lt;p class="text-gray-600"&gt;For a single, affordable monthly fee, you get unlimited, on-demand support for all subjects, at a fraction of the cost of private tutoring.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- Testimonial Column --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="lg:col-span-6 mt-12 lg:mt-0 p-8 bg-indigo-50 rounded-2xl shadow-xl border-2 border-indigo-100"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;i data-lucide="quote" class="w-12 h-12 text-indigo-400 mb-4"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;blockquote class="text-lg italic text-gray-700"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>"TutorAI has been a game-changer for our family. With my demanding work schedule, I was constantly worried about my son's homework. Now, I can see his progress from my phone and know that he's getting the help he needs, even when I'm not there."</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/blockquote&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;footer class="mt-4 text-tutor-primary font-semibold"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>— Maria S., Busy Working Parent</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/footer&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 5. Final CTA / Pricing Section --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section id="cta" class="py-16 sm:py-24 bg-tutor-accent"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-4xl sm:text-5xl font-extrabold text-white mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Unlock Stress-Free Support Today.</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-xl text-white mb-10 max-w-2xl mx-auto"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Invest in your child's success for just **$40 a month** after a risk-free 14-day trial. No commitment, cancel anytime.</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Added open-onboarding-modal class --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#" class="open-onboarding-modal inline-flex items-center justify-center w-full sm:w-auto px-12 py-5 text-xl font-extrabold rounded-xl bg-white text-tutor-primary hover:bg-tutor-primary/90 transition duration-300 shadow-2xl transform hover:scale-[1.05]"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Start Your 14-Day Free Trial Now</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i data-lucide="chevron-right" class="w-6 h-6 ml-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- 6. FAQs Section --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;section class="py-16 bg-white"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center mb-12"&gt;Frequently Asked Questions&lt;/h2&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="space-y-4"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- FAQ 1 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;details class="bg-gray-50 rounded-lg p-6 shadow-md cursor-pointer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;summary class="flex justify-between items-center text-lg font-semibold text-gray-900 hover:text-tutor-primary transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>What subjects and grade levels does TutorAI cover?</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i data-lucide="chevron-down" class="w-5 h-5 ml-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/summary&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="mt-4 text-gray-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>TutorAI supports K-12 students in all core subjects, including math, science, English, and social studies. Our AI is versatile and can adapt to the unique needs of different assignments.</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/details&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- FAQ 2 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;details class="bg-gray-50 rounded-lg p-6 shadow-md cursor-pointer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;summary class="flex justify-between items-center text-lg font-semibold text-gray-900 hover:text-tutor-primary transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>How does TutorAI ensure my child's safety and privacy?</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i data-lucide="chevron-down" class="w-5 h-5 ml-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/summary&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="mt-4 text-gray-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>We prioritize student safety. We use industry-standard security measures to protect your family's data. All interactions are monitored and stored securely, and we never share your child's personal information with third parties. Parents also have full access to chat history in the dashboard.</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/details&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- FAQ 3 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;details class="bg-gray-50 rounded-lg p-6 shadow-md cursor-pointer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;summary class="flex justify-between items-center text-lg font-semibold text-gray-900 hover:text-tutor-primary transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Can my child talk to the AI?</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i data-lucide="chevron-down" class="w-5 h-5 ml-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/summary&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="mt-4 text-gray-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Yes! Our service includes both text and a verbal "voice" feature that allows students to speak their questions and get an encouraging, verbal response from the AI, making the experience even more interactive and natural.</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/details&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!-- FAQ 4 --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;details class="bg-gray-50 rounded-lg p-6 shadow-md cursor-pointer"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;summary class="flex justify-between items-center text-lg font-semibold text-gray-900 hover:text-tutor-primary transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Do I need a credit card for the free trial?</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i data-lucide="chevron-down" class="w-5 h-5 ml-2"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/summary&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;p class="mt-4 text-gray-600"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Yes, a credit card is required to sign up for the free trial, but you will **not** be charged until the 14-day trial period is over. You can easily cancel the subscription at any time during the trial.</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/details&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/section&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Footer --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;footer class="bg-gray-800 text-white py-12"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="grid grid-cols-1 md:grid-cols-3 gap-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h4 class="text-xl font-bold mb-4 flex items-center"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;i data-lucide="graduation-cap" class="w-5 h-5 mr-2 text-tutor-accent"&gt;&lt;/i&gt; TutorAI</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-gray-400 text-sm"&gt;Empowering the next generation of learners through personalized AI guidance.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h4 class="text-lg font-semibold mb-4 text-tutor-accent"&gt;Quick Links&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ul class="space-y-2 text-sm"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;a href="#cta" class="hover:text-white text-gray-400 transition duration-150"&gt;Start Trial&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;a href="#" class="hover:text-white text-gray-400 transition duration-150"&gt;Parent Dashboard Demo&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;a href="#" class="hover:text-white text-gray-400 transition duration-150"&gt;Curriculum Alignment&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h4 class="text-lg font-semibold mb-4 text-tutor-accent"&gt;Contact&lt;/h4&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ul class="space-y-2 text-sm text-gray-400"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;Email: support@tutorai.com&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;(800) 555-TUTOR&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;li&gt;&lt;a href="#" class="hover:text-white transition duration-150"&gt;Privacy Policy&lt;/a&gt;&lt;/li&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="mt-8 pt-6 border-t border-gray-700 text-center text-sm text-gray-500"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&amp;copy; 2025 TutorAI, LLC. All rights reserved.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/footer&gt;</p>
+<p class="p2"><span class="Apple-converted-space">    </span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- Onboarding Modal Structure --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="onboardingModal" class="modal-enter-from fixed inset-0 bg-gray-900 bg-opacity-75 z-50 hidden flex items-center justify-center" aria-modal="true" role="dialog"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="modalContent" class="modal-content-enter-from bg-white rounded-xl shadow-2xl max-w-lg w-11/12 p-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="flex justify-between items-center mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-2xl font-bold text-tutor-primary" id="modalTitle"&gt;Tell Us About Your Student&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;button id="closeModalButton" class="text-gray-400 hover:text-gray-600 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;i data-lucide="x" class="w-6 h-6"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;form id="onboardingForm" onsubmit="event.preventDefault(); return false;"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Progress Bar --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="h-2 bg-gray-200 rounded-full"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;div id="progressBar" class="h-2 bg-tutor-accent rounded-full transition-all duration-500 ease-in-out" style="width: 25%;"&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Step 1: Grade Level --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="step1" data-step="1"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-lg font-semibold text-gray-700 mb-4"&gt;1. What grade level is your student currently in?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="grade" value="k5" class="mr-2 text-tutor-accent focus:ring-tutor-accent" checked&gt; Elementary School (K-5)</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="grade" value="68" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; Middle School (6-8)</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="grade" value="912" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; High School (9-12)</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-8 flex justify-end"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button type="button" data-next-step="2" class="next-step-btn px-6 py-3 bg-tutor-accent text-white font-semibold rounded-xl hover:bg-tutor-accent-dark transition shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Next: Subject &lt;i data-lucide="arrow-right" class="w-4 h-4 inline ml-1"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Step 2: Subject Focus --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="step2" data-step="2" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-lg font-semibold text-gray-700 mb-4"&gt;2. Which subject do they need the most help with right now?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="subject" value="math" class="mr-2 text-tutor-accent focus:ring-tutor-accent" checked&gt; Math (Algebra, Geometry, Calculus)</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="subject" value="science" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; Science (Biology, Physics, Chemistry)</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="subject" value="english" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; English &amp; Writing</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="subject" value="other" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; Other (History, Foreign Language, etc.)</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-8 flex justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button type="button" data-prev-step="1" class="prev-step-btn px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i data-lucide="arrow-left" class="w-4 h-4 inline mr-1"&gt;&lt;/i&gt; Back</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button type="button" data-next-step="3" class="next-step-btn px-6 py-3 bg-tutor-primary text-white font-semibold rounded-xl hover:bg-tutor-primary/80 transition shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Next: Goal &lt;i data-lucide="arrow-right" class="w-4 h-4 inline ml-1"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Step 3: Learning Goal --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="step3" data-step="3" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-lg font-semibold text-gray-700 mb-4"&gt;3. What is your primary learning goal for your student?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="goal" value="better_grades" class="mr-2 text-tutor-accent focus:ring-tutor-accent" checked&gt; Get better grades and boost GPA</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="goal" value="test_prep" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; Prepare for a specific test or exam</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="goal" value="confidence" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; Build confidence and reduce stress</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="goal" value="homework_help" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; Get reliable, daily homework support</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-8 flex justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button type="button" data-prev-step="2" class="prev-step-btn px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i data-lucide="arrow-left" class="w-4 h-4 inline mr-1"&gt;&lt;/i&gt; Back</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button type="button" data-next-step="4" class="next-step-btn px-6 py-3 bg-tutor-primary text-white font-semibold rounded-xl hover:bg-tutor-primary/80 transition shadow-md"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Next: Curriculum &lt;i data-lucide="arrow-right" class="w-4 h-4 inline ml-1"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- Step 4: State Curriculum (NEW STEP) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="step4" data-step="4" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p class="text-lg font-semibold text-gray-700 mb-4"&gt;4. Which state's public school curriculum does your student follow?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="space-y-3"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="stateCurriculum" value="ca" class="mr-2 text-tutor-accent focus:ring-tutor-accent" checked&gt; California (CA) - Common Core</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="stateCurriculum" value="tx" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; Texas (TX) - TEKS</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="stateCurriculum" value="ny" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; New York (NY) - Next Generation Standards</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;input type="radio" name="stateCurriculum" value="other_state" class="mr-2 text-tutor-accent focus:ring-tutor-accent"&gt; Another US State / International</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="mt-8 flex justify-between"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button type="button" data-prev-step="3" class="prev-step-btn px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>&lt;i data-lucide="arrow-left" class="w-4 h-4 inline mr-1"&gt;&lt;/i&gt; Back</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button type="submit" id="completeOnboarding" class="px-6 py-3 bg-tutor-accent text-white font-extrabold rounded-xl hover:bg-tutor-accent-dark transition shadow-lg"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>Complete &amp; Start Trial</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/form&gt;</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- Completion Message (Initially hidden) --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="completionMessage" class="hidden text-center py-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;i data-lucide="check-circle" class="w-16 h-16 text-tutor-accent mx-auto mb-4"&gt;&lt;/i&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-3xl font-bold text-gray-900 mb-3"&gt;You're All Set!&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-lg text-gray-600 mb-6"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Thanks for telling us about your student. We are now customizing TutorAI to provide the best possible experience for them.</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p class="text-sm text-gray-500 mb-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>*The form data (Grade: &lt;span id="summaryGrade" class="font-bold"&gt;&lt;/span&gt;, Subject: &lt;span id="summarySubject" class="font-bold"&gt;&lt;/span&gt;, Goal: &lt;span id="summaryGoal" class="font-bold"&gt;&lt;/span&gt;, Curriculum: &lt;span id="summaryCurriculum" class="font-bold"&gt;&lt;/span&gt;) has been processed.</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a href="#" class="px-8 py-4 text-lg font-bold rounded-xl bg-tutor-primary text-white hover:bg-tutor-primary/90 transition duration-300 shadow-xl" onclick="document.getElementById('closeModalButton').click()"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Go to Checkout</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Initialize Lucide icons</p>
+<p class="p1"><span class="Apple-converted-space">        </span>lucide.createIcons();</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Wrap all main execution logic in window.onload to ensure the DOM is fully ready.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.onload = function() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>console.log("✅ Script loaded and DOM is ready. Attaching event listeners.");</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const modal = document.getElementById('onboardingModal');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const modalContent = document.getElementById('modalContent');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const closeModalButton = document.getElementById('closeModalButton');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const openModalButtons = document.querySelectorAll('.open-onboarding-modal');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const nextButtons = document.querySelectorAll('.next-step-btn');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const prevButtons = document.querySelectorAll('.prev-step-btn');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const onboardingForm = document.getElementById('onboardingForm');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const completionMessage = document.getElementById('completionMessage');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const progressBar = document.getElementById('progressBar');</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let currentStep = 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const totalSteps = 4;<span class="Apple-converted-space"> </span></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// --- Utility Functions ---</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function updateModalState(show) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (show) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Show modal and handle entry transition</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>modal.classList.remove('hidden', 'modal-leave-to');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>modal.classList.add('modal-enter-active');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>modal.classList.remove('modal-enter-active');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, 300);</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>modalContent.classList.remove('modal-content-leave-to');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>modalContent.classList.add('modal-content-enter-active');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>modalContent.classList.remove('modal-content-enter-active');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, 300);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>// Hide modal and handle exit transition</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>modal.classList.remove('modal-enter-active');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>modal.classList.add('modal-leave-to');</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>modalContent.classList.remove('modal-content-enter-active');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>modalContent.classList.add('modal-content-leave-to');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>setTimeout(() =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>modal.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Reset modal state on close</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>currentStep = 1;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>showStep(currentStep);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>onboardingForm.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>completionMessage.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>document.getElementById('modalTitle').textContent = 'Tell Us About Your Student'; // Reset title</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}, 300);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function showStep(step) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.querySelectorAll('#onboardingForm &gt; div[data-step]').forEach(stepElement =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const stepNum = parseInt(stepElement.getAttribute('data-step'));</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (stepNum === step) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>stepElement.classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>stepElement.classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>currentStep = step;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updateProgressBar();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function updateProgressBar() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const percentage = (currentStep / totalSteps) * 100;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>progressBar.style.width = `${percentage}%`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function getFormData() {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const grade = document.querySelector('input[name="grade"]:checked')?.value || 'N/A';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const subject = document.querySelector('input[name="subject"]:checked')?.value || 'N/A';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const goal = document.querySelector('input[name="goal"]:checked')?.value || 'N/A';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const stateCurriculum = document.querySelector('input[name="stateCurriculum"]:checked')?.value || 'N/A';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return { grade, subject, goal, stateCurriculum };</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>function formatValue(value) {</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>const map = {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'k5': 'K-5 (Elementary)',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'68': '6-8 (Middle School)',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'912': '9-12 (High School)',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'math': 'Math',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'science': 'Science',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'english': 'English &amp; Writing',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'other': 'Other',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'better_grades': 'Better Grades/GPA',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'test_prep': 'Test Preparation',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'confidence': 'Confidence Building',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'homework_help': 'Daily Homework Support',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'ca': 'California (Common Core)',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'tx': 'Texas (TEKS)',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'ny': 'New York (Next Generation Standards)',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>'other_state': 'Another US / International',</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>};</p>
+<p class="p1"><span class="Apple-converted-space">                 </span>return map[value] || value;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// --- Event Handlers ---</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>openModalButtons.forEach(button =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>button.addEventListener('click', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.log('✅ MODAL OPENER CLICKED: Opening onboarding modal.');</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>updateModalState(true);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>closeModalButton.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>updateModalState(false);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Close modal when clicking outside (on the overlay)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>modal.addEventListener('click', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (e.target === modal) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>updateModalState(false);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Handle Next Step</p>
+<p class="p1"><span class="Apple-converted-space">            </span>nextButtons.forEach(button =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>button.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const nextStep = parseInt(button.getAttribute('data-next-step'));</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.log(`➡️ NEXT BUTTON CLICKED: Navigating to Step ${nextStep}`);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>showStep(nextStep);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Handle Previous Step</p>
+<p class="p1"><span class="Apple-converted-space">            </span>prevButtons.forEach(button =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>button.addEventListener('click', () =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const prevStep = parseInt(button.getAttribute('data-prev-step'));</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.log(`⬅️ BACK BUTTON CLICKED: Navigating back to Step ${prevStep}`);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>showStep(prevStep);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><span class="Apple-converted-space">            </span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Handle Form Completion</p>
+<p class="p1"><span class="Apple-converted-space">            </span>onboardingForm.addEventListener('submit', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.log('🎉 FORM SUBMITTED: Processing onboarding data.');</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const data = getFormData();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// 1. Hide the form</p>
+<p class="p1"><span class="Apple-converted-space">                </span>onboardingForm.style.display = 'none';</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// 2. Populate and show the completion message</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('summaryGrade').textContent = formatValue(data.grade);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('summarySubject').textContent = formatValue(data.subject);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('summaryGoal').textContent = formatValue(data.goal);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('summaryCurriculum').textContent = formatValue(data.stateCurriculum);<span class="Apple-converted-space"> </span></p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>document.getElementById('modalTitle').textContent = 'Success!';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>completionMessage.classList.remove('hidden');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Log or submit the data here in a real application</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.log('Onboarding data collected:', data);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Initial setup</p>
+<p class="p1"><span class="Apple-converted-space">            </span>showStep(1);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateProgressBar();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Allow closing with the Escape key</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.addEventListener('keydown', (e) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (e.key === 'Escape' &amp;&amp; !modal.classList.contains('hidden')) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>updateModalState(false);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}; // End of window.onload</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
