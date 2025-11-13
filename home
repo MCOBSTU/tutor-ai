@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>TutorAI - Personalized Learning for Your Child</title>
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* Light Gray Background */
+        }
+
+        /* Color tokens used in the page */
+        .text-tutor-primary { color: #1e3a8a; }           /* Deep Blue */
+        .bg-tutor-accent { background-color: #10b981; }   /* Emerald Green */
+        .hover\:bg-tutor-accent-dark:hover { background-color: #059669; }
+
+        /* Added missing classes used by the page */
+        .bg-tutor-primary { background-color: #1e3a8a; }
+        .border-t-tutor-primary { border-top-color: #1e3a8a; }
+
+        /* Modal transition helpers */
+        .modal-enter-active, .modal-leave-active { transition: opacity 0.3s ease; }
+        .modal-enter-from, .modal-leave-to { opacity: 0; }
+        .modal-content-enter-active, .modal-content-leave-active { transition: transform 0.3s ease, opacity 0.3s ease; }
+        .modal-content-enter-from, .modal-content-leave-to { transform: scale(0.95); opacity: 0; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <span class="text-3xl text-tutor-primary">
+                    <i data-lucide="graduation-cap" class="w-8 h-8"></i>
+                </span>
+                <span class="text-2xl font-extrabold text-tutor-primary">TutorAI</span>
+            </div>
+
+            <!-- Right side: small student image added to top-right (visible on sm+) + CTAs -->
+            <div class="flex items-center space-x-3">
+                <!-- Top-right picture: visible on small screens and up, hidden on very small devices to preserve space -->
+                <img
+                    src="https://placehold.co/64x64/1e3a8a/ffffff?text=👩‍🎓"
+                    alt="Smiling student using TutorAI"
+                    class="hidden sm:inline-block w-12 h-12 rounded-full object-cover shadow-md"
+                    onerror="this.onerror=null; this.src='https://placehold.co/64x64/1e3a8a/ffffff?text=TutorAI';"
+                />
+
+                <!-- Converted CTAs that open the onboarding modal to buttons (better semantics + keyboard behavior) -->
+                <button type="button" class="open-onboarding-modal hidden sm:inline-flex px-4 py-2 text-sm font-semibold rounded-full bg-tutor-accent text-white hover:bg-tutor-accent-dark transition duration-300 shadow-md">
+                    Start Free Trial
+                </button>
+
+                <button type="button" class="open-onboarding-modal sm:hidden px-3 py-1.5 text-sm font-semibold rounded-full bg-tutor-accent text-white hover:bg-tutor-accent-dark transition duration-300">
+                    Trial
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. Hero Section -->
+        <section class="py-16 sm:py-24 bg-white text-gray-900">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
+                    <div class="lg:col-span-6">
+                        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 leading-tight">
+                            Give your child the support they need to succeed, <span class="text-tutor-accent">without the added stress.</span>
+                        </h1>
+                        <p class="mt-4 text-xl text-gray-600">
+                            TutorAI provides 24/7 AI-powered tutoring that helps your child master schoolwork, build confidence, and grow their love of learning.
+                        </p>
+
+                        <div class="mt-8 space-y-4 sm:space-y-0 sm:flex sm:space-x-4">
+                            <button type="button" class="open-onboarding-modal inline-flex items-center justify-center w-full sm:w-auto px-8 py-4 text-lg font-bold rounded-xl bg-tutor-accent text-white hover:bg-tutor-accent-dark transition duration-300 shadow-xl transform hover:scale-[1.02]">
+                                Start Your 14-Day Free Trial
+                            </button>
+                        </div>
+
+                        <p class="mt-4 text-sm text-gray-500">
+                            No credit card required for the first 14 days. Just $40/month after.
+                        </p>
+                    </div>
+
+                    <!-- Hero Image -->
+                    <div class="lg:col-span-6 mt-12 lg:mt-0 rounded-2xl shadow-2xl overflow-hidden transform hover:scale-[1.01] transition duration-500">
+                        <img 
+                            src="https://placehold.co/600x400/1e3a8a/ffffff?text=Personalized%20AI%20Tutoring%20Session" 
+                            alt="A visual representation of an AI-powered, personalized tutoring session." 
+                            class="w-full h-auto object-cover" 
+                            onerror="this.onerror=null; this.src='https://placehold.co/600x400/1e3a8a/ffffff?text=AI%20Learning%20Session';"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. What is TutorAI & Pricing Banner -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6">What is TutorAI?</h2>
+                    <p class="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
+                        TutorAI is designed for busy parents who want to give their children a leg up in school but don't have the time to help with homework every night. Our <span class="font-bold">friendly, conversational AI</span> guides your child through their assignments, encouraging them to think critically and solve problems on their own.
+                    </p>
+                </div>
+
+                <!-- Pricing Highlight Banner -->
+                <div class="mt-12 text-center bg-indigo-50 border-4 border-indigo-200 p-6 sm:p-8 rounded-2xl shadow-lg">
+                    <p class="text-2xl sm:text-3xl font-bold text-tutor-primary">
+                        Unlimited 24/7 AI Tutoring for Just
+                        <span class="text-tutor-accent text-4xl sm:text-5xl font-extrabold">$40</span>
+                        a month.
+                    </p>
+                    <p class="mt-2 text-md text-indigo-700">Less than the cost of one hour with a private tutor.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. How It Works (4 Steps) -->
+        <section class="py-16 sm:py-24 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center mb-12">How It Works in 4 Simple Steps</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                    <!-- Step 1 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-t-tutor-accent transform hover:shadow-xl transition duration-300">
+                        <i data-lucide="upload" class="w-10 h-10 text-tutor-accent mb-4 p-2 bg-tutor-accent/10 rounded-full"></i>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">1. Securely Upload Assignments</h3>
+                        <p class="text-gray-600">Parents upload photos or documents of homework, and our AI instantly prepares to guide the student through the material.</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-t-tutor-primary transform hover:shadow-xl transition duration-300">
+                        <i data-lucide="book-open-check" class="w-10 h-10 text-tutor-primary mb-4 p-2 bg-tutor-primary/10 rounded-full"></i>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">2. State-Aligned Curriculum</h3>
+                        <p class="text-gray-600">We align support with state-specific curricula, ensuring the help your child gets is directly relevant to their classroom learning.</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-t-orange-500 transform hover:shadow-xl transition duration-300">
+                        <i data-lucide="message-circle-code" class="w-10 h-10 text-orange-500 mb-4 p-2 bg-orange-500/10 rounded-full"></i>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">3. The Conversational "Voice"</h3>
+                        <p class="text-gray-600">Students interact via text or speech with a warm, encouraging AI voice. It asks leading questions and provides strategic hints, focusing on guiding them toward the solution.</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-t-purple-500 transform hover:shadow-xl transition duration-300">
+                        <i data-lucide="bar-chart-3" class="w-10 h-10 text-purple-500 mb-4 p-2 bg-purple-500/10 rounded-full"></i>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">4. Progress Tracking for Parents</h3>
+                        <p class="text-gray-600">Your dedicated parent dashboard offers a transparent view of subjects worked on, session time, and concepts mastered for total peace of mind.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Why Parents Choose TutorAI & Testimonial -->
+        <section class="py-16 sm:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+                    <div class="lg:col-span-6">
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-8">Why Parents Choose TutorAI</h2>
+                        <ul class="space-y-6">
+                            <li class="flex items-start">
+                                <i data-lucide="clock" class="w-6 h-6 text-tutor-primary flex-shrink-0 mt-1"></i>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-bold text-gray-900">24/7 Convenience</h3>
+                                    <p class="text-gray-600">Homework help is available whenever your child needs it—after dinner or before school. No scheduling conflicts, ever.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="zap" class="w-6 h-6 text-tutor-accent flex-shrink-0 mt-1"></i>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-bold text-gray-900">Encourages Independence</h3>
+                                    <p class="text-gray-600">By guiding them to the solution, we build critical thinking and self-confidence, ensuring they deeply understand the material instead of relying on simple memorization.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="wallet" class="w-6 h-6 text-indigo-500 flex-shrink-0 mt-1"></i>
+                                <div class="ml-4">
+                                    <h3 class="text-xl font-bold text-gray-900">Cost-Effective Solution</h3>
+                                    <p class="text-gray-600">For a single, affordable monthly fee, you get unlimited, on-demand support for all subjects, at a fraction of the cost of private tutoring.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="lg:col-span-6 mt-12 lg:mt-0 p-8 bg-indigo-50 rounded-2xl shadow-xl border-2 border-indigo-100">
+                        <i data-lucide="quote" class="w-12 h-12 text-indigo-400 mb-4"></i>
+                        <blockquote class="text-lg italic text-gray-700">
+                            "TutorAI has been a game-changer for our family. With my demanding work schedule, I was constantly worried about my son's homework. Now, I can see his progress from my phone and know that he's getting the help he needs, even when I'm not there."
+                        </blockquote>
+                        <footer class="mt-4 text-tutor-primary font-semibold">
+                            — Maria S., Busy Working Parent
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Final CTA / Pricing Section -->
+        <section id="cta" class="py-16 sm:py-24 bg-tutor-accent">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl sm:text-5xl font-extrabold text-white mb-6">
+                    Unlock Stress-Free Support Today.
+                </h2>
+                <p class="text-xl text-white mb-10 max-w-2xl mx-auto">
+                    Invest in your child's success for just <strong>$40 a month</strong> after a risk-free 14-day trial. No commitment, cancel anytime.
+                </p>
+
+                <button type="button" class="open-onboarding-modal inline-flex items-center justify-center w-full sm:w-auto px-12 py-5 text-xl font-extrabold rounded-xl bg-white text-tutor-primary hover:bg-tutor-primary/90 transition duration-300 shadow-2xl transform hover:scale-[1.05]">
+                    Start Your 14-Day Free Trial Now
+                    <i data-lucide="chevron-right" class="w-6 h-6 ml-2"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- 6. FAQs Section -->
+        <section class="py-16 bg-white">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center mb-12">Frequently Asked Questions</h2>
+
+                <div class="space-y-4">
+                    <!-- FAQ 1 -->
+                    <details class="bg-gray-50 rounded-lg p-6 shadow-md cursor-pointer">
+                        <summary class="flex justify-between items-center text-lg font-semibold text-gray-900 hover:text-tutor-primary transition duration-150">
+                            What subjects and grade levels does TutorAI cover?
+                            <i data-lucide="chevron-down" class="w-5 h-5 ml-2"></i>
+                        </summary>
+                        <p class="mt-4 text-gray-600">
+                            TutorAI supports K-12 students in all core subjects, including math, science, English, and social studies. Our AI is versatile and can adapt to the unique needs of different assignments.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 2 -->
+                    <details class="bg-gray-50 rounded-lg p-6 shadow-md cursor-pointer">
+                        <summary class="flex justify-between items-center text-lg font-semibold text-gray-900 hover:text-tutor-primary transition duration-150">
+                            How does TutorAI ensure my child's safety and privacy?
+                            <i data-lucide="chevron-down" class="w-5 h-5 ml-2"></i>
+                        </summary>
+                        <p class="mt-4 text-gray-600">
+                            We prioritize student safety. We use industry-standard security measures to protect your family's data. All interactions are monitored and stored securely, and we never share your child's personal information with third parties. Parents also have full access to chat history in the dashboard.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 3 -->
+                    <details class="bg-gray-50 rounded-lg p-6 shadow-md cursor-pointer">
+                        <summary class="flex justify-between items-center text-lg font-semibold text-gray-900 hover:text-tutor-primary transition duration-150">
+                            Can my child talk to the AI?
+                            <i data-lucide="chevron-down" class="w-5 h-5 ml-2"></i>
+                        </summary>
+                        <p class="mt-4 text-gray-600">
+                            Yes! Our service includes both text and a verbal "voice" feature that allows students to speak their questions and get an encouraging, verbal response from the AI, making the experience even more interactive and natural.
+                        </p>
+                    </details>
+
+                    <!-- FAQ 4 (fixed copy) -->
+                    <details class="bg-gray-50 rounded-lg p-6 shadow-md cursor-pointer">
+                        <summary class="flex justify-between items-center text-lg font-semibold text-gray-900 hover:text-tutor-primary transition duration-150">
+                            Do I need a credit card for the free trial?
+                            <i data-lucide="chevron-down" class="w-5 h-5 ml-2"></i>
+                        </summary>
+                        <p class="mt-4 text-gray-600">
+                            No — a credit card is not required to sign up for the free 14-day trial. You will only be charged if you choose to continue after the trial ends.
+                        </p>
+                    </details>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-xl font-bold mb-4 flex items-center">
+                        <i data-lucide="graduation-cap" class="w-5 h-5 mr-2 text-tutor-accent"></i> TutorAI
+                    </h4>
+                    <p class="text-gray-400 text-sm">Empowering the next generation of learners through personalized AI guidance.</p>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-tutor-accent">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#cta" class="hover:text-white text-gray-400 transition duration-150">Start Trial</a></li>
+                        <li><a href="#" class="hover:text-white text-gray-400 transition duration-150">Parent Dashboard Demo</a></li>
+                        <li><a href="#" class="hover:text-white text-gray-400 transition duration-150">Curriculum Alignment</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-lg font-semibold mb-4 text-tutor-accent">Contact</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li>Email: <a href="mailto:support@tutorai.com" class="hover:text-white">support@tutorai.com</a></li>
+                        <li>(800) 555-TUTOR</li>
+                        <li><a href="#" class="hover:text-white transition duration-150">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-gray-700 text-center text-sm text-gray-500">
+                &copy; 2025 TutorAI, LLC. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Onboarding Modal Structure -->
+    <div id="onboardingModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 z-50 hidden flex items-center justify-center"
+         aria-modal="true" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div id="modalContent" class="bg-white rounded-xl shadow-2xl max-w-lg w-11/12 p-8 modal-content-enter-from" tabindex="-1">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-tutor-primary" id="modalTitle">Tell Us About Your Student</h3>
+                <button id="closeModalButton" class="text-gray-400 hover:text-gray-600 transition" aria-label="Close onboarding modal">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <form id="onboardingForm" onsubmit="event.preventDefault(); return false;">
+                <!-- Progress Bar -->
+                <div class="mb-6">
+                    <div class="h-2 bg-gray-200 rounded-full">
+                        <div id="progressBar" class="h-2 bg-tutor-accent rounded-full transition-all duration-500 ease-in-out" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- Step 1 -->
+                <div id="step1" data-step="1">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">1. What grade level is your student currently in?</p>
+                    <div class="space-y-3">
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="grade" value="k5" class="mr-2 text-tutor-accent focus:ring-tutor-accent" checked> Elementary School (K-5)
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="grade" value="68" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> Middle School (6-8)
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="grade" value="912" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> High School (9-12)
+                        </label>
+                    </div>
+                    <div class="mt-8 flex justify-end">
+                        <button type="button" data-next-step="2" class="next-step-btn px-6 py-3 bg-tutor-accent text-white font-semibold rounded-xl hover:bg-tutor-accent-dark transition shadow-md">
+                            Next: Subject <i data-lucide="arrow-right" class="w-4 h-4 inline ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div id="step2" data-step="2" class="hidden">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">2. Which subject do they need the most help with right now?</p>
+                    <div class="space-y-3">
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="subject" value="math" class="mr-2 text-tutor-accent focus:ring-tutor-accent" checked> Math (Algebra, Geometry, Calculus)
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="subject" value="science" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> Science (Biology, Physics, Chemistry)
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="subject" value="english" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> English & Writing
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="subject" value="other" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> Other (History, Foreign Language, etc.)
+                        </label>
+                    </div>
+                    <div class="mt-8 flex justify-between">
+                        <button type="button" data-prev-step="1" class="prev-step-btn px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition">
+                            <i data-lucide="arrow-left" class="w-4 h-4 inline mr-1"></i> Back
+                        </button>
+                        <button type="button" data-next-step="3" class="next-step-btn px-6 py-3 bg-tutor-primary text-white font-semibold rounded-xl hover:bg-tutor-primary/80 transition shadow-md">
+                            Next: Goal <i data-lucide="arrow-right" class="w-4 h-4 inline ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div id="step3" data-step="3" class="hidden">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">3. What is your primary learning goal for your student?</p>
+                    <div class="space-y-3">
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="goal" value="better_grades" class="mr-2 text-tutor-accent focus:ring-tutor-accent" checked> Get better grades and boost GPA
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="goal" value="test_prep" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> Prepare for a specific test or exam
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="goal" value="confidence" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> Build confidence and reduce stress
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="goal" value="homework_help" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> Get reliable, daily homework support
+                        </label>
+                    </div>
+                    <div class="mt-8 flex justify-between">
+                        <button type="button" data-prev-step="2" class="prev-step-btn px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition">
+                            <i data-lucide="arrow-left" class="w-4 h-4 inline mr-1"></i> Back
+                        </button>
+                        <button type="button" data-next-step="4" class="next-step-btn px-6 py-3 bg-tutor-primary text-white font-semibold rounded-xl hover:bg-tutor-primary/80 transition shadow-md">
+                            Next: Curriculum <i data-lucide="arrow-right" class="w-4 h-4 inline ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div id="step4" data-step="4" class="hidden">
+                    <p class="text-lg font-semibold text-gray-700 mb-4">4. Which state's public school curriculum does your student follow?</p>
+                    <div class="space-y-3">
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="stateCurriculum" value="ca" class="mr-2 text-tutor-accent focus:ring-tutor-accent" checked> California (CA) - Common Core
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="stateCurriculum" value="tx" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> Texas (TX) - TEKS
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="stateCurriculum" value="ny" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> New York (NY) - Next Generation Standards
+                        </label>
+                        <label class="block p-4 border border-gray-200 rounded-xl cursor-pointer hover:border-tutor-accent transition duration-150">
+                            <input type="radio" name="stateCurriculum" value="other_state" class="mr-2 text-tutor-accent focus:ring-tutor-accent"> Another US State / International
+                        </label>
+                    </div>
+                    <div class="mt-8 flex justify-between">
+                        <button type="button" data-prev-step="3" class="prev-step-btn px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition">
+                            <i data-lucide="arrow-left" class="w-4 h-4 inline mr-1"></i> Back
+                        </button>
+                        <button type="submit" id="completeOnboarding" class="px-6 py-3 bg-tutor-accent text-white font-extrabold rounded-xl hover:bg-tutor-accent-dark transition shadow-lg">
+                            Complete & Start Trial
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Completion Message (Initially hidden). Announced via aria-live -->
+            <div id="completionMessage" class="hidden text-center py-8" role="status" aria-live="polite">
+                <i data-lucide="check-circle" class="w-16 h-16 text-tutor-accent mx-auto mb-4"></i>
+                <h3 class="text-3xl font-bold text-gray-900 mb-3">You're All Set!</h3>
+                <p class="text-lg text-gray-600 mb-6">
+                    Thanks for telling us about your student. We are now customizing TutorAI to provide the best possible experience for them.
+                </p>
+                <p class="text-sm text-gray-500 mb-8">
+                    *The form data (Grade: <span id="summaryGrade" class="font-bold"></span>, Subject: <span id="summarySubject" class="font-bold"></span>, Goal: <span id="summaryGoal" class="font-bold"></span>, Curriculum: <span id="summaryCurriculum" class="font-bold"></span>) has been processed.
+                </p>
+                <a href="#" class="px-8 py-4 text-lg font-bold rounded-xl bg-tutor-primary text-white hover:bg-tutor-primary/90 transition duration-300 shadow-xl" onclick="document.getElementById('closeModalButton').click()">
+                    Go to Checkout
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        window.onload = function() {
+            console.log("✅ Script loaded and DOM is ready. Attaching event listeners.");
+
+            const modal = document.getElementById('onboardingModal');
+            const modalContent = document.getElementById('modalContent');
+            const closeModalButton = document.getElementById('closeModalButton');
+            const openModalButtons = document.querySelectorAll('.open-onboarding-modal');
+            const nextButtons = document.querySelectorAll('.next-step-btn');
+            const prevButtons = document.querySelectorAll('.prev-step-btn');
+            const onboardingForm = document.getElementById('onboardingForm');
+            const completionMessage = document.getElementById('completionMessage');
+            const progressBar = document.getElementById('progressBar');
+
+            let currentStep = 1;
+            const totalSteps = 4;
+
+            // Focus trap variables
+            let previouslyFocusedElement = null;
+            let focusableElements = [];
+            let firstFocusable = null;
+            let lastFocusable = null;
+            let boundKeydownHandler = null;
+
+            // --- Utilities ---
+
+            function getFocusableIn(element) {
+                const selectors = [
+                    'a[href]:not([disabled])',
+                    'button:not([disabled])',
+                    'textarea:not([disabled])',
+                    'input:not([disabled])',
+                    'select:not([disabled])',
+                    '[tabindex]:not([tabindex="-1"])'
+                ];
+                return Array.from(element.querySelectorAll(selectors.join(','))).filter(el => el.offsetParent !== null);
+            }
+
+            function enableFocusTrap() {
+                focusableElements = getFocusableIn(modalContent);
+                firstFocusable = focusableElements[0];
+                lastFocusable = focusableElements[focusableElements.length - 1];
+
+                boundKeydownHandler = function(e) {
+                    if (e.key === 'Tab') {
+                        if (focusableElements.length === 0) {
+                            e.preventDefault();
+                            return;
+                        }
+                        if (e.shiftKey) {
+                            // Shift + Tab
+                            if (document.activeElement === firstFocusable) {
+                                e.preventDefault();
+                                lastFocusable.focus();
+                            }
+                        } else {
+                            // Tab
+                            if (document.activeElement === lastFocusable) {
+                                e.preventDefault();
+                                firstFocusable.focus();
+                            }
+                        }
+                    }
+                    // Allow Escape as well
+                    if (e.key === 'Escape') {
+                        updateModalState(false);
+                    }
+                };
+
+                document.addEventListener('keydown', boundKeydownHandler);
+            }
+
+            function disableFocusTrap() {
+                if (boundKeydownHandler) {
+                    document.removeEventListener('keydown', boundKeydownHandler);
+                    boundKeydownHandler = null;
+                }
+            }
+
+            function updateModalState(show) {
+                if (show) {
+                    previouslyFocusedElement = document.activeElement;
+
+                    // Show modal
+                    modal.classList.remove('hidden', 'modal-leave-to');
+                    modal.classList.add('modal-enter-active');
+                    modal.setAttribute('aria-hidden', 'false');
+
+                    setTimeout(() => modal.classList.remove('modal-enter-active'), 300);
+
+                    modalContent.classList.remove('modal-content-leave-to');
+                    modalContent.classList.add('modal-content-enter-active');
+
+                    setTimeout(() => modalContent.classList.remove('modal-content-enter-active'), 300);
+
+                    // Focus management
+                    enableFocusTrap();
+                    // Focus the first focusable item (close button or first input)
+                    setTimeout(() => {
+                        const focusables = getFocusableIn(modalContent);
+                        if (focusables.length) {
+                            focusables[0].focus();
+                        } else {
+                            modalContent.focus();
+                        }
+                    }, 50);
+                } else {
+                    // Hide modal
+                    modal.classList.remove('modal-enter-active');
+                    modal.classList.add('modal-leave-to');
+
+                    modalContent.classList.remove('modal-content-enter-active');
+                    modalContent.classList.add('modal-content-leave-to');
+
+                    setTimeout(() => {
+                        modal.classList.add('hidden');
+                        modal.setAttribute('aria-hidden', 'true');
+                        // Reset state
+                        currentStep = 1;
+                        showStep(currentStep);
+                        onboardingForm.style.display = 'block';
+                        completionMessage.classList.add('hidden');
+                        document.getElementById('modalTitle').textContent = 'Tell Us About Your Student';
+                        // restore focus
+                        disableFocusTrap();
+                        if (previouslyFocusedElement) previouslyFocusedElement.focus();
+                    }, 300);
+                }
+            }
+
+            function showStep(step) {
+                document.querySelectorAll('#onboardingForm > div[data-step]').forEach(stepElement => {
+                    const stepNum = parseInt(stepElement.getAttribute('data-step'));
+                    if (stepNum === step) {
+                        stepElement.classList.remove('hidden');
+                    } else {
+                        stepElement.classList.add('hidden');
+                    }
+                });
+                currentStep = step;
+                updateProgressBar();
+            }
+
+            function updateProgressBar() {
+                const percentage = (currentStep / totalSteps) * 100;
+                progressBar.style.width = `${percentage}%`;
+            }
+
+            function getFormData() {
+                const grade = document.querySelector('input[name="grade"]:checked')?.value || 'N/A';
+                const subject = document.querySelector('input[name="subject"]:checked')?.value || 'N/A';
+                const goal = document.querySelector('input[name="goal"]:checked')?.value || 'N/A';
+                const stateCurriculum = document.querySelector('input[name="stateCurriculum"]:checked')?.value || 'N/A';
+                return { grade, subject, goal, stateCurriculum };
+            }
+
+            function formatValue(value) {
+                 const map = {
+                    'k5': 'K-5 (Elementary)',
+                    '68': '6-8 (Middle School)',
+                    '912': '9-12 (High School)',
+                    'math': 'Math',
+                    'science': 'Science',
+                    'english': 'English & Writing',
+                    'other': 'Other',
+                    'better_grades': 'Better Grades/GPA',
+                    'test_prep': 'Test Preparation',
+                    'confidence': 'Confidence Building',
+                    'homework_help': 'Daily Homework Support',
+                    'ca': 'California (Common Core)',
+                    'tx': 'Texas (TEKS)',
+                    'ny': 'New York (Next Generation Standards)',
+                    'other_state': 'Another US / International',
+                 };
+                 return map[value] || value;
+            }
+
+            // --- Event Handlers ---
+
+            openModalButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    console.log('✅ MODAL OPENER CLICKED: Opening onboarding modal.');
+                    updateModalState(true);
+                });
+            });
+
+            closeModalButton.addEventListener('click', () => {
+                updateModalState(false);
+            });
+
+            // Close modal when clicking outside (on the overlay)
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    updateModalState(false);
+                }
+            });
+
+            // Handle Next Step
+            nextButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const nextStep = parseInt(button.getAttribute('data-next-step'));
+                    console.log(`➡️ NEXT BUTTON CLICKED: Navigating to Step ${nextStep}`);
+                    showStep(nextStep);
+                });
+            });
+
+            // Handle Previous Step
+            prevButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const prevStep = parseInt(button.getAttribute('data-prev-step'));
+                    console.log(`⬅️ BACK BUTTON CLICKED: Navigating back to Step ${prevStep}`);
+                    showStep(prevStep);
+                });
+            });
+
+            // Handle Form Completion
+            onboardingForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                console.log('🎉 FORM SUBMITTED: Processing onboarding data.');
+
+                const data = getFormData();
+
+                // Hide the form
+                onboardingForm.style.display = 'none';
+
+                // Populate and show completion message
+                document.getElementById('summaryGrade').textContent = formatValue(data.grade);
+                document.getElementById('summarySubject').textContent = formatValue(data.subject);
+                document.getElementById('summaryGoal').textContent = formatValue(data.goal);
+                document.getElementById('summaryCurriculum').textContent = formatValue(data.stateCurriculum);
+
+                document.getElementById('modalTitle').textContent = 'Success!';
+                completionMessage.classList.remove('hidden');
+
+                // In production: send data to your backend securely (HTTPS) and follow privacy/COPPA rules for minors.
+                // Example (commented):
+                // fetch('/api/onboarding', { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data) });
+
+                console.log('Onboarding data collected:', data);
+            });
+
+            // Initial setup
+            showStep(1);
+            updateProgressBar();
+
+            // Allow closing with the Escape key when modal open (additional safety)
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+                    updateModalState(false);
+                }
+            });
+        }; // End of window.onload
+    </script>
+</body>
+</html>
